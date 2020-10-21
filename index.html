@@ -11,15 +11,18 @@
 <div class="row justify-content-center" style="margin:20px;">    
 	<img class="img-fluid " id="img-main" class="col-sm-6 bg-dark" />
 </div>
+<div class="text-center container-fluid fixed-bottom">
 <div class="row justify-content-center" style="margin:20px;">    
-	<input class="col-sm-3" id="inp_file" type="file" onchange="loadFile(event)" accept="image/*" multiple="multiple" />
+	<input class="col-sm-3" id="inp_file" type="file" onchange="loadFile(event)" accept="image/*" multiple="multiple" value="Choose" />
 </div>
-<div class="row justify-content-center" style="margin:20px;">    
+<div class="row justify-content-center" >    
     <button class="col-sm-3 btn btn-success" onclick="showRandom()">Random</button>
+</div>
 </div>
 </div>
 <script>
 var files;
+var lastindex = -1;
   var loadFile = function(event) {
 	  files = Array(event.target.files.length);
 	  for (i = 0; i < files.length;i++)
@@ -30,6 +33,11 @@ var files;
   function showRandom()
   {
 	var i = Math.floor(Math.random()*files.length);
+	while (i == lastindex)
+	{
+		i = Math.floor(Math.random()*files.length);
+	}
+	lastindex = i;
   	var img = document.getElementById('img-main');
   	img.src = files[i];
   }
